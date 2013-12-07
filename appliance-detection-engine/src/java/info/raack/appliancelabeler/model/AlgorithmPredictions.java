@@ -35,17 +35,29 @@ import java.util.Map;
 public class AlgorithmPredictions {
 	private Map<UserAppliance, List<EnergyTimestep>> energyTimesteps;
 	private List<ApplianceStateTransition> stateTransitions;
-	
+
 	public Map<UserAppliance, List<EnergyTimestep>> getEnergyTimesteps() {
 		return energyTimesteps;
 	}
-	public void setEnergyTimesteps(Map<UserAppliance, List<EnergyTimestep>> energyTimesteps) {
+
+	public void setEnergyTimesteps(
+			Map<UserAppliance, List<EnergyTimestep>> energyTimesteps) {
 		this.energyTimesteps = energyTimesteps;
 	}
+
 	public List<ApplianceStateTransition> getStateTransitions() {
 		return stateTransitions;
 	}
-	public void setStateTransitions(List<ApplianceStateTransition> stateTransitions) {
+
+	public void setStateTransitions(
+			List<ApplianceStateTransition> stateTransitions) {
 		this.stateTransitions = stateTransitions;
 	}
+
+	@Override
+	public String toString() {
+		return "AlgorithmPredictions [energyTimesteps=" + energyTimesteps
+				+ ", stateTransitions=" + stateTransitions + "]";
+	}
+
 }

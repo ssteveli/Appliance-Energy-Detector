@@ -47,14 +47,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.oauth.consumer.OAuthRestTemplate;
 import org.springframework.security.oauth.consumer.OAuthSecurityContext;
 import org.springframework.security.oauth.consumer.OAuthSecurityContextHolder;
+import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-
-import edu.cmu.hcii.stepgreen.data.connector.StepgreenConnector;
 
 @Component
 public class OAuthRequestProcessor {

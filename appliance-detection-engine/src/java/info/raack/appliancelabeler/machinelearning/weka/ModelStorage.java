@@ -34,7 +34,7 @@ import weka.core.Instances;
 
 public class ModelStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private CollectiveRandomizableSingleClassifierEnhancer model;
 	private Instances trainingData;
 

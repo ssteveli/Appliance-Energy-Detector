@@ -40,10 +40,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.security.oauth.consumer.token.OAuthConsumerToken;
+import org.springframework.security.oauth.consumer.OAuthConsumerToken;
+
 
 import edu.cmu.hcii.stepgreen.data.ted.data.SecondData;
-import edu.cmu.hcii.stepgreen.data.teds.Ted5000;
+
 
 public class MockDataService implements DataService {
 
@@ -60,7 +61,7 @@ public class MockDataService implements DataService {
 	}
 
 	@Override
-	public List<Ted5000> getTEDIdsForUserId(String userId, boolean needContext) {
+	public List<?> getTEDIdsForUserId(String userId, boolean needContext) {
 		// TODO Auto-generated method stub
 		return null;
 	}

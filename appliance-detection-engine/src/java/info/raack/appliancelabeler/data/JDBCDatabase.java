@@ -38,7 +38,6 @@ import info.raack.appliancelabeler.model.UserAppliance;
 import info.raack.appliancelabeler.model.appliancestatetransition.ApplianceStateTransition;
 import info.raack.appliancelabeler.model.appliancestatetransition.GenericStateTransition;
 import info.raack.appliancelabeler.model.energymonitor.EnergyMonitor;
-import info.raack.appliancelabeler.model.energymonitor.Ted5000Monitor;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +86,7 @@ import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.support.SqlLobValue;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.security.oauth.consumer.token.OAuthConsumerToken;
+import org.springframework.security.oauth.consumer.OAuthConsumerToken;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -311,7 +310,8 @@ public class JDBCDatabase implements Database {
 				String tedId = tokenizer.nextToken();
 				String mtuId = tokenizer.nextToken();
 				
-				return new Ted5000Monitor(id, userId, tedId, mtuId, stepgreenBasehost);
+				return null;
+				//return new Ted5000Monitor(id, userId, tedId, mtuId, stepgreenBasehost);
 			}
 			// TODO - redesign this code so that it doesn't have to know about the simulator, but also doesn't throw an exception when it doesn't know about the type
 			else if(monitorType.equals("simulator")) {

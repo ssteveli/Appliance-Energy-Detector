@@ -220,10 +220,10 @@ public class MainController extends BaseController {
 			}
 			
 			
-			final List<Ted5000> teds = dataService.getTEDIdsForUserId(userId, false);
-			String tedsJS = new GsonBuilder().create().toJson(teds, new TypeToken<List<Ted5000>>() {}.getType());
+			final List<?> teds = dataService.getTEDIdsForUserId(userId, false);
+			String tedsJS = new GsonBuilder().create().toJson(teds, new TypeToken<List<?>>() {}.getType());
 			
-			model.put("teds", new ArrayList<Ted5000>() {{ addAll(teds); }});
+			model.put("teds", new ArrayList<?>() {{ addAll(teds); }});
 			model.put("tedsJS", tedsJS);
 			model.put("appliances", appliances);
 			model.put("userAppliances", userAppliances);
@@ -521,7 +521,7 @@ public class MainController extends BaseController {
 	private EnergyMonitor getCurrentEnergyMonitor(HttpServletRequest request, HttpServletResponse response) {
 		String userId = getUserId(request, response, false);
 		
-		List<Ted5000> teds = dataService.getTEDIdsForUserId(userId, false);
+		List<?> teds = dataService.getTEDIdsForUserId(userId, false);
 		
 		// TODO - allow user to select the Ted / MTU combination that they want to use, put it in the path
 		// right now, just select the first ted and mtu

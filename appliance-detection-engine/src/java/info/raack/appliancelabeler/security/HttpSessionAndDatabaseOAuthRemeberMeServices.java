@@ -41,8 +41,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth.consumer.OAuthConsumerToken;
 import org.springframework.security.oauth.consumer.rememberme.HttpSessionOAuthRememberMeServices;
-import org.springframework.security.oauth.consumer.token.OAuthConsumerToken;
 import org.springframework.stereotype.Component;
 
 @Component("httpSessionAndDatabaseOAuthRememberMeServices")

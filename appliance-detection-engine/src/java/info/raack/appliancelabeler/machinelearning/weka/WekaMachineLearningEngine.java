@@ -47,14 +47,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import weka.classifiers.Classifier;
 import weka.classifiers.collective.CollectiveRandomizableSingleClassifierEnhancer;
 import weka.classifiers.collective.meta.SimpleCollective;
 import weka.classifiers.collective.meta.YATSI;
+import weka.classifiers.collective.meta.FilteredCollectiveClassifier;
 import weka.core.Attribute;
+import weka.core.Capabilities;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.SerializationHelper;
 import weka.core.UnsupportedAttributeTypeException;
 import weka.core.Utils;
 
@@ -101,10 +103,14 @@ public class WekaMachineLearningEngine implements MachineLearningEngine {
 		// actually build the classifier
 		CollectiveRandomizableSingleClassifierEnhancer classifier = null;
 		
-		Instances[] instances = createInstances(attributeTypes, attributeNames, mlData);
+		final Instances[] instances = createInstances(attributeTypes, attributeNames, mlData);
 		
 		if(modelType == MODEL_TYPE.YATSI) {
 			classifier = new YATSI();
+			classifier.setDebug(true);
+			classifier.setVerbose(true);
+			classifier.setClassifier(new SampleClassifier(instances[0]));
+			
 		} else if(modelType == MODEL_TYPE.SIMPLE) {
 			classifier = new SimpleCollective();
 		} else {
@@ -118,6 +124,7 @@ public class WekaMachineLearningEngine implements MachineLearningEngine {
 			classifier.buildClassifier(instances[0], instances[1]);
 		}
 		catch (UnsupportedAttributeTypeException e2) {
+			logger.warn("no luck", e2);
 			if(e2.getMessage().equals("weka.classifiers.collective.meta.YATSI: Cannot handle unary class!")) {
 				// just return -1 if we can't predict because we don't have more than one class label
 				return null;

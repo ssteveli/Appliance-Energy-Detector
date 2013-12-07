@@ -43,7 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.security.oauth.consumer.token.OAuthConsumerToken;
+import org.springframework.security.oauth.consumer.OAuthConsumerToken;
 
 import edu.cmu.hcii.stepgreen.data.ted.data.SecondData;
 

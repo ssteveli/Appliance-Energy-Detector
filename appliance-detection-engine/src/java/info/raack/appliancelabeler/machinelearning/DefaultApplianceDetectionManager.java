@@ -223,6 +223,8 @@ public class DefaultApplianceDetectionManager implements ApplianceDetectionManag
 									// 1) generate a model to create predictions
 									AlgorithmResult result = algorithm.train(monitor, dataReader);
 									
+									System.out.println("$$$$$$$$$$ algo results: " + result);
+									
 									// 2) save the model
 									if(result != null) {
 										logger.debug("Saving algorithm model for " + result.getAlgorithm());
@@ -280,7 +282,7 @@ public class DefaultApplianceDetectionManager implements ApplianceDetectionManag
 		Map<Integer, AlgorithmPredictions> allAlgorithmPredictions = new HashMap<Integer, AlgorithmPredictions>();
 		
 		for(ApplianceEnergyConsumptionDetectionAlgorithm algorithm : applianceStateTransitionDetectionAlgorithms) {
-			if(!ignoredAlgorithmIds.contains(algorithm.getId()) && activeAlgorithms.contains(algorithm.getClass().getName())) {
+			if(!ignoredAlgorithmIds.contains(algorithm.getId()) && activeAlgorithms.contains(algorithm.getAlgorithmName())) {
 				// backfill
 				logger.info("Running " + algorithm);
 				
@@ -335,7 +337,7 @@ public class DefaultApplianceDetectionManager implements ApplianceDetectionManag
 		try {
 			// look over all active algorithms and ensure that they all report OK before reporting ok
 			for(final ApplianceEnergyConsumptionDetectionAlgorithm algorithm : applianceStateTransitionDetectionAlgorithms) {
-				if(activeAlgorithms.contains(algorithm.getClass().getName())) {
+				if(activeAlgorithms.contains(algorithm.getAlgorithmName())) {
 					
 					LabelResult result = algorithm.detectAcceptableUserTraining(dataReader);
 					if(result != LabelResult.OK) {

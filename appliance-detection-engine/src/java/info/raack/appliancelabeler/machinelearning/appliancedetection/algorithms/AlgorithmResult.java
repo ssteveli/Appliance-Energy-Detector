@@ -51,4 +51,24 @@ public class AlgorithmResult {
 	public EnergyMonitor getMonitor() {
 		return monitor;
 	}
+
+	public void setResult(Serializable result) {
+		this.result = result;
+	}
+
+	public void setAlgorithm(ApplianceEnergyConsumptionDetectionAlgorithm algorithm) {
+		this.algorithm = algorithm;
+	}
+
+	public void setMonitor(EnergyMonitor monitor) {
+		this.monitor = monitor;
+	}
+
+	@Override
+	public String toString() {
+		return "AlgorithmResult [result=" + result + ", algorithm=" + algorithm
+				+ ", monitor=" + monitor + "]";
+	}
+	
+	
 }
