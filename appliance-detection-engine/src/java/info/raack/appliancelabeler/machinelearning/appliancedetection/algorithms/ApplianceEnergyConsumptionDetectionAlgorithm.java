@@ -55,7 +55,7 @@ public abstract class ApplianceEnergyConsumptionDetectionAlgorithm {
 	private DateUtils dateUtils;
 	
 	public static double missingValue = Double.NaN;
-	
+
 	public abstract int getId();
 	protected abstract AlgorithmPredictions algorithmCalculateApplianceEnergyUsePredictions(EnergyMonitor monitor, Queue<EnergyTimestep> timesteps, ItemReader<SecondData> measurements);
 	public abstract AlgorithmResult train(EnergyMonitor monitor, ItemReader<SecondData> dataReader);
@@ -87,6 +87,7 @@ public abstract class ApplianceEnergyConsumptionDetectionAlgorithm {
 		Calendar startDate = dateUtils.getPreviousFiveMinuteIncrement(firstMeasurementDate);
 		Calendar endDate = dateUtils.getPreviousFiveMinuteIncrement(lastMeasurementDate);
 		
+		logger.debug("startDate: " + startDate + ", endDate: " + endDate);
 		
 		while(startDate.getTimeInMillis() < endDate.getTimeInMillis()) {
 			EnergyTimestep timestep = new EnergyTimestep();
