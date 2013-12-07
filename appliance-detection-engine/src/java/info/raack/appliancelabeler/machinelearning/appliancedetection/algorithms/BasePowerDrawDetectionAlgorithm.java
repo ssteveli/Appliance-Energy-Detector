@@ -33,7 +33,6 @@ import info.raack.appliancelabeler.machinelearning.MachineLearningEngine;
 import info.raack.appliancelabeler.machinelearning.MachineLearningEngine.ATTRIBUTE_TYPE;
 import info.raack.appliancelabeler.machinelearning.MachineLearningEngine.MODEL_TYPE;
 import info.raack.appliancelabeler.machinelearning.appliancedetection.algorithmcomponents.ApplianceState;
-import info.raack.appliancelabeler.machinelearning.appliancedetection.algorithmcomponents.powerspike.PowerSpike;
 import info.raack.appliancelabeler.model.AlgorithmPredictions;
 import info.raack.appliancelabeler.model.EnergyTimestep;
 import info.raack.appliancelabeler.model.UserAppliance;
@@ -97,7 +96,6 @@ public abstract class BasePowerDrawDetectionAlgorithm<T> extends ApplianceEnergy
 		
 		// get all of the possible user appliances and their last known on/off state
 		List<UserAppliance> apps = database.getUserAppliancesForAlgorithmForEnergyMonitor(energyMonitor, getId());
-		
 		
 		Map<UserAppliance, Double> currentTimestepEnergyConsumption = new HashMap<UserAppliance, Double>();
 		
@@ -272,7 +270,7 @@ public abstract class BasePowerDrawDetectionAlgorithm<T> extends ApplianceEnergy
 		// find all state transitions in data based on algorithm - these will not have any labels right now
 		Map<Long,List<ApplianceStateTransition>> stateTransitions = detectStateTransitions(null, null, dataReader);
 		
-		logger.debug("Got all state transitions");
+		logger.info("Got all state transitions: " + stateTransitions);
 		
 		List<ApplianceStateTransition> stateTransitionInstances = new ArrayList<ApplianceStateTransition>();
 		
@@ -323,13 +321,20 @@ public abstract class BasePowerDrawDetectionAlgorithm<T> extends ApplianceEnergy
 			// user appliance id
 			if(stateTransition.getUserAppliance() != null) {
 				hasLabels = true;
-				vals[total++] = stateTransition.getUserAppliance().getId();
+				if (stateTransition.getUserAppliance().getId() >= 0)
+					vals[total++] = stateTransition.getUserAppliance().getId();
+				else
+					vals[total++] = missingValue;
 			} else {
 				vals[total++] = missingValue;
 			}
 			
 			mlData.add(vals);
 		}
+		
+		final AlgorithmPredictions p = new AlgorithmPredictions();
+		p.setStateTransitions(stateTransitionInstances);
+		database.storeAlgorithmPredictions(monitor, new HashMap<Integer,AlgorithmPredictions>() {{ put(getId(), p); }});
 		
 		stateTransitionInstances = null;
 		
@@ -438,7 +443,7 @@ public abstract class BasePowerDrawDetectionAlgorithm<T> extends ApplianceEnergy
 				mlEngine.releaseModel(modelId);
 			}
 		}
-	
+			
 		return transitions;
 	}
 	
