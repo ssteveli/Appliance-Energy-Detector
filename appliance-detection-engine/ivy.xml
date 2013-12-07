@@ -59,15 +59,17 @@
         <dependency org="org.springframework.batch" name="spring-batch-infrastructure" rev="2.1.8.RELEASE" />
         <dependency org="org.springframework.security" name="spring-security-core" rev="3.0.5.RELEASE" />
         <dependency org="org.springframework.security" name="spring-security-web" rev="3.0.5.RELEASE" />
-        <dependency org="edu.cmu.hcii.footprints.stepgreen" name="ted-data-collector" rev="1.0-SNAPSHOT" changing="true" conf="base->embedded-runtime" />
-        <dependency org="info.raack.appliancedetection" name="appliance-common" rev="1.0-SNAPSHOT" changing="true" conf="base->runtime" />
-        <dependency org="org.springframework.security.oauth" name="spring-security-oauth" rev="1.0.0.M3.Taylor" />
+        <!--dependency org="edu.cmu.hcii.footprints.stepgreen" name="ted-data-collector" rev="1.0-SNAPSHOT" changing="true" conf="base->embedded-runtime" /-->
+        <!--dependency org="info.raack.appliancedetection" name="appliance-common" rev="1.0-SNAPSHOT" changing="true" conf="base->runtime" /-->
+        <dependency org="org.springframework.security.oauth" name="spring-security-oauth" rev="1.0.4.RELEASE" />
         <dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" ><artifact name="slf4j-api" type="jar" ext="jar" conf="base" /></dependency>
         <dependency org="javax.xml.bind" name="jaxb-api" rev="2.2.2" />
         <dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.2" />
-        <dependency org="weka" name="weka-collective-classification" rev="2011-10-14-Taylor-SNAPSHOT" />
+        <dependency org="nz.ac.waikato.cms.weka" name="weka-dev" rev="3.7.9"/>
+        <!--dependency org="weka" name="weka-collective-classification" rev="2011-10-14-Taylor-SNAPSHOT" /-->
+        
        	<dependency org="commons-io" name="commons-io" rev="2.0.1" />
-       	<dependency org="edu.emory.mathcs" name="jtransforms" rev="2.4" />
+       	<dependency org="edu.emory.mathcs" name="JTransforms" rev="2.4" />
        	<dependency org="org.apache.commons" name="commons-math" rev="2.2" />
         
         <!-- COMPILATION ONLY -->
